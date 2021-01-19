@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PomodoroApplication.Models.Assignment>
+
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<h2>List of Assignments</h2>
+
+<p>
+    @Html.ActionLink("Assignments", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PointsWorth)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PointsWorth)
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Edit", new { id = item.AssignmentId })  |
+                @Html.ActionLink("More Information", "Details", new { id = item.AssignmentId })  |
+                @Html.ActionLink("Remove", "Delete", new { id = item.AssignmentId })
+            </td>
+        </tr>
+    }
+</table>
