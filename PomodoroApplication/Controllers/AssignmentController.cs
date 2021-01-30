@@ -1,4 +1,5 @@
 ﻿using PomodoroApplication.Models;
+using PomodoroApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,6 +13,9 @@ namespace PomodoroApplication.Controllers
     public class AssignmentController : Controller
     {
         private AssignmentDbContext _db = new AssignmentDbContext();
+
+        //private AllViewModelDbContext _db = new AllViewModelDbContext()
+
         // GET: Assignment/Index
         public ActionResult Index()
         {
@@ -62,8 +66,8 @@ namespace PomodoroApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Assignment restaurant = _db.Assignments.Find(id);
-            _db.Assignments.Remove(restaurant);
+            Assignment assignment = _db.Assignments.Find(id);
+            _db.Assignments.Remove(assignment);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -120,5 +124,53 @@ namespace PomodoroApplication.Controllers
             }
             return View(assignment);
         }
+
+        public ActionResult Start(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Assignment start = _db.Assignments.Find(id);
+
+            if (start == null)
+            {
+                return HttpNotFound();
+            }
+            return View(start);
+        }
+
+        public ActionResult Complete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Assignment assignment = _db.Assignments.Find(id);
+
+            if (assignment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(assignment);
+        }
+
+        //POST: Restaurant/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Complete(Assignment assignment)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Entry(assignment).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(assignment);
+        }
+
+
     }
 }

@@ -1,0 +1,64 @@
+﻿@model PomodoroApplication.Models.Assignment
+
+@{
+    ViewBag.Title = "Start";
+}
+
+<div class="center-block">
+<h2 class="text-center text-capitalize">Focus Time</h2>
+
+</div>
+
+<div class=" center-block">
+    
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.Description)
+        </dd>
+        
+        <dt>
+        </dt>
+                @Html.DisplayFor(model => model.AssignmentName)
+
+        <dd>
+                @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+
+<br />
+<p>@Html.ActionLink("Back to Tasks", "Index")</p>
+
+
+
+
+<div id="container">
+    <p id="work" class="label">Work:</p>
+    <p id="break" class="label">Break:</p>
+    <p id="cycles" class="label">Points:</p>
+
+    <div id="work-timer" class="timer">
+        <p id="w_minutes">0</p>
+        <p class="semicolon">:</p>
+        <p id="w_seconds">10</p>
+    </div>
+    <div id="break-timer" class="timer">
+        <p id="b_minutes">0</p><p class="semicolon">:</p><p id="b_seconds">05</p>
+    </div>
+    <p id="points" class="timer">0</p>
+    <button id="start" type="button" class="btn btn-primary">Start</button>
+    <button id="stop" type="button" class="btn btn-primary">Pause</button>
+    <button id="reset" type="button" class="btn btn-primary">Reset</button>
+    @Html.ActionLink("Complete", "Index", "Reward", new { area = "" }, new { @class = "btn btn-primary", @id = "bank" })
+
+
+
+
+</div>
+
+

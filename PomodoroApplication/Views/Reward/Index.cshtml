@@ -4,24 +4,26 @@
     ViewBag.Title = "Reward";
 }
 
-<h2>List of Rewards</h2>
+<h2>Rewards</h2>
 
-<p>
-    @Html.ActionLink("Rewards", "Create")
-</p>
 
-<table class="table">
+
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.RewardName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.PointCost)
         </th>
-       
+
+        <th>
+            Actions
+        </th>
+
     </tr>
     @foreach (var item in Model)
     {
@@ -29,17 +31,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RewardName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.PointCost)
             </td>
             <td>
-                @Html.ActionLink("Change", "Edit", new { id = item.RewardId })  |
-                @Html.ActionLink("More Information", "Details", new { id = item.RewardId })  |
-                @Html.ActionLink("Remove", "Delete", new { id = item.RewardId })
+                @*@Html.ActionLink("More Information", "Details", new { id = item.RewardId })  |*@
+
+                @Html.ActionLink("Treat Yourself", "TreatYourself") |
+                @Html.ActionLink("Edit", "Edit", new { id = item.RewardId })  |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RewardId })
+
             </td>
         </tr>
     }
+        @*<tfoot>
+            <tr>
+                <td>Total</td>
+                <td>Total - @Model.Sum(i => i.PointCost)</td>
+            </tr>
+        </tfoot>*@
 </table>
+
+<p>
+    @Html.ActionLink("New Reward", "Create", null, new { @class = "btn-lg btn-default" })
+    
+</p>

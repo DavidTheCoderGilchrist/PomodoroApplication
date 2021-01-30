@@ -15,6 +15,7 @@ namespace PomodoroApplication.Controllers
         // GET: Reward/Index
         public ActionResult Index()
         {
+            
             return View(_db.Rewards.ToList());
         }
 
@@ -24,6 +25,13 @@ namespace PomodoroApplication.Controllers
         {
             return View();
         }
+
+        //public ActionResult Complete()
+        //{
+            
+
+        //    return View(_db.Rewards.ToList());
+        //}
 
         //Post: Restaurant/Create
         [HttpPost]
@@ -62,8 +70,8 @@ namespace PomodoroApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Reward restaurant = _db.Rewards.Find(id);
-            _db.Rewards.Remove(restaurant);
+            Reward reward = _db.Rewards.Find(id);
+            _db.Rewards.Remove(reward);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -120,5 +128,23 @@ namespace PomodoroApplication.Controllers
             }
             return View(reward);
         }
+
+        public ActionResult Claim(Reward reward)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Rewards.Add(reward);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(reward);
+        }
+
+        public ActionResult TreatYourself()
+        {
+            return new RedirectResult("https://media2.giphy.com/media/aptJIZbitjf2g/giphy.gif");
+        }
+
     }
 }

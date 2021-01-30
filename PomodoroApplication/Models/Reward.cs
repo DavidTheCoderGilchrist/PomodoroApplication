@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -9,8 +10,10 @@ namespace PomodoroApplication.Models
     public class Reward
     {
         public int RewardId { get; set; }
+        [DisplayName("Reward")]
         public string RewardName { get; set; }
         public string Description { get; set; }
+        [DisplayName("Point Cost")]
         public int PointCost { get; set; }
     }
 

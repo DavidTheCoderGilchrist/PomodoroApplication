@@ -4,13 +4,10 @@
     ViewBag.Title = "Achievement";
 }
 
-<h2>List of Achievements</h2>
+<h2>Achievements</h2>
 
-<p>
-    @Html.ActionLink("New Achievement", "Create")
-</p>
 
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.AchievementName)
@@ -24,11 +21,14 @@
         <th>
             @Html.DisplayNameFor(model => model.PointsToUnlock)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.IsUnlocked)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            Actions
         </th>
 
     </tr>
@@ -47,19 +47,24 @@
     <td>
         @Html.DisplayFor(modelItem => item.PointsToUnlock)
     </td>
-    <td>
+    @*<td>
         @Html.DisplayFor(modelItem => item.IsUnlocked)
-    </td>
+    </td>*@
     <td>
         @Html.DisplayFor(modelItem => item.Message)
     </td>
 
     <td>
-        @Html.ActionLink("Change", "Edit", new { id = item.AchievementId })  |
-        @Html.ActionLink("More Information", "Details", new { id = item.AchievementId })  |
+        @Html.ActionLink("Edit", "Edit", new { id = item.AchievementId })  |
+        @*@Html.ActionLink("More Information", "Details", new { id = item.AchievementId })  |*@
         @Html.ActionLink("Remove", "Delete", new { id = item.AchievementId })
     </td>
 </tr>
     }
 </table>
+
+<p>
+    @Html.ActionLink("New Achievement", "Create", null, new { @class = "btn-lg btn-default" })
+
+</p>
 
